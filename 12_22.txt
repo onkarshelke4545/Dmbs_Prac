@@ -1,0 +1,33 @@
+use CompanyDB
+
+
+db.Employees.insertMany([
+    { EmployeeID: 1, Name: 'John Doe', Department: 'HR', Salary: 50000 },
+    { EmployeeID: 2, Name: 'Jane Smith', Department: 'Finance', Salary: 60000 },
+    { EmployeeID: 3, Name: 'Mike Johnson', Department: 'IT', Salary: 70000 },
+    { EmployeeID: 4, Name: 'Sarah Brown', Department: 'Finance', Salary: 55000 },
+    { EmployeeID: 5, Name: 'David White', Department: 'HR', Salary: 80000 },
+    { EmployeeID: 6, Name: 'Emma Green', Department: 'IT', Salary: 75000 },
+    { EmployeeID: 7, Name: 'James Black', Department: 'Finance', Salary: 48000 }
+]);
+
+
+
+var mapFunction = function() {
+    emit(this.Department, this.Salary);
+};
+
+var reduceFunction = function(key, values) {
+    return Array.sum(values);  
+};
+
+
+db.Employees.mapReduce(
+    mapFunction,
+    reduceFunction,
+    { out: "totalSalariesByDepartment" }
+);
+
+
+
+db.totalSalariesByDepartment.find();

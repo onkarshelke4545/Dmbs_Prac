@@ -1,0 +1,30 @@
+// mangod --version
+// mongosh
+
+
+db.createCollection('sachin');
+
+db.sachin.insertMany([{rollNo:1,name:'sachin'}
+,{rollNo:2,name:'sachin'}
+,{rollNo:3,name:'sachin'}
+,{rollNo:4,name:'sachin'}]);
+
+db.sachin.find();
+
+db.sachin.updateOne({rollNo:4},{$set:{name:'vishal'}});
+db.sachin.find();
+
+db.sachin.deleteOne({rollNo:1});
+db.sachin.find();
+
+// db.sachin.find({
+//   $or:[
+//     {rollNo:{$gt:3}},
+//       {nama:'rajput'}
+    
+//     ]
+//   })
+  
+
+db.sachin.save({rollNo:1,name:'sachin'});
+db.sachin.find();
